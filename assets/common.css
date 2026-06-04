@@ -1,0 +1,468 @@
+/**
+ * common.css — 진로탐구 성장 플랫폼
+ * 공통 헤더·브랜딩·내비게이션·유틸 스타일 (STEP03)
+ *
+ * 포함:
+ *  1. 디자인 토큰 (platform.html 기존 토큰과 완전 일치)
+ *  2. 공통 리셋
+ *  3. .cp-topbar — 최상단 학생 정보 + 진행 단계 표시 바
+ *  4. .cp-breadcrumb — 단계 네비게이션 (keyword → inquiry → roadmap)
+ *  5. .cp-summary-box — 이전 단계 데이터 요약 박스
+ *  6. .cp-btn 계열 — 공통 버튼 스타일
+ *  7. 공통 애니메이션
+ */
+
+/* ══════════════════════════════════════════════
+   1. 디자인 토큰 (platform.html과 동일)
+══════════════════════════════════════════════ */
+:root {
+  --navy:    #0f1f3d;
+  --navy2:   #1b3260;
+  --navy3:   #243d73;
+  --teal:    #16a394;
+  --teal2:   #e7faf7;
+  --teal3:   #0d7a6e;
+  --gold:    #f4c430;
+  --coral:   #ff6b6b;
+  --bg:      #f0f4fb;
+  --bg2:     #e8edf7;
+  --card:    #ffffff;
+  --text:    #1f2937;
+  --muted:   #667085;
+  --line:    #dbe3f0;
+  --green:   #16a34a;
+  --greenL:  #dcfce7;
+  --orange:  #f97316;
+  --orangeL: #fff7ed;
+  --red:     #dc2626;
+  --redL:    #fef2f2;
+  --shadow:  0 4px 20px rgba(15,31,61,.07);
+  --shadow2: 0 8px 32px rgba(15,31,61,.12);
+  --r:       14px;
+  --r2:      20px;
+
+  /* 플랫폼 전용 추가 토큰 */
+  --step-kw:      #0369a1;  /* STEP1 키워드 — 파란 계열 */
+  --step-inquiry: #16a394;  /* STEP2 탐구설계 — 청록 */
+  --step-roadmap: #7c3aed;  /* STEP3 로드맵 — 보라 */
+  --bar-h:        44px;     /* .cp-topbar 높이 */
+}
+
+/* ══════════════════════════════════════════════
+   2. 공통 리셋 (이미 각 파일에 있으면 충돌 없음)
+══════════════════════════════════════════════ */
+.cp-topbar *,
+.cp-topbar *::before,
+.cp-topbar *::after,
+.cp-breadcrumb *,
+.cp-breadcrumb *::before,
+.cp-breadcrumb *::after,
+.cp-summary-box *,
+.cp-summary-box *::before,
+.cp-summary-box *::after {
+  box-sizing: border-box;
+}
+
+/* ══════════════════════════════════════════════
+   3. .cp-topbar — 상단 고정 학생 정보 바
+   각 페이지 상단에 삽입: <div class="cp-topbar" id="cp-topbar"></div>
+══════════════════════════════════════════════ */
+.cp-topbar {
+  position: fixed;
+  top: 0; left: 0; right: 0;
+  z-index: 200;
+  height: var(--bar-h);
+  background: linear-gradient(90deg, var(--navy) 0%, var(--navy2) 100%);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 20px;
+  gap: 16px;
+  box-shadow: 0 2px 12px rgba(15,31,61,.25);
+  font-family: 'Pretendard', 'Apple SD Gothic Neo', 'Malgun Gothic', system-ui, sans-serif;
+}
+
+.cp-topbar-left {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.cp-topbar-logo {
+  font-size: 13px;
+  font-weight: 800;
+  color: #fff;
+  letter-spacing: -.3px;
+  white-space: nowrap;
+  opacity: .95;
+}
+
+.cp-topbar-logo span {
+  color: var(--gold);
+}
+
+.cp-topbar-divider {
+  width: 1px;
+  height: 18px;
+  background: rgba(255,255,255,.2);
+}
+
+.cp-topbar-student {
+  font-size: 12px;
+  color: rgba(255,255,255,.75);
+  white-space: nowrap;
+}
+
+.cp-topbar-student strong {
+  color: #a5f3ef;
+  font-weight: 700;
+}
+
+.cp-topbar-right {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+/* 단계 표시 pill */
+.cp-step-pill {
+  font-size: 11px;
+  font-weight: 700;
+  padding: 3px 10px;
+  border-radius: 99px;
+  border: 1.5px solid rgba(255,255,255,.25);
+  color: rgba(255,255,255,.55);
+  white-space: nowrap;
+  transition: all .2s;
+  text-decoration: none;
+  cursor: pointer;
+  background: transparent;
+  font-family: inherit;
+}
+
+.cp-step-pill:hover {
+  color: #fff;
+  border-color: rgba(255,255,255,.5);
+  background: rgba(255,255,255,.08);
+}
+
+.cp-step-pill.active {
+  color: var(--navy);
+  background: var(--gold);
+  border-color: var(--gold);
+}
+
+.cp-step-pill.done {
+  color: #a5f3ef;
+  border-color: var(--teal);
+  background: rgba(22,163,148,.18);
+}
+
+/* 홈 버튼 */
+.cp-home-btn {
+  font-size: 11px;
+  font-weight: 700;
+  padding: 3px 10px;
+  border-radius: 99px;
+  border: 1.5px solid rgba(255,255,255,.35);
+  color: rgba(255,255,255,.85);
+  background: rgba(255,255,255,.08);
+  white-space: nowrap;
+  cursor: pointer;
+  transition: all .2s;
+  text-decoration: none;
+  font-family: inherit;
+}
+
+.cp-home-btn:hover {
+  background: rgba(255,255,255,.18);
+  color: #fff;
+}
+
+/* ══════════════════════════════════════════════
+   4. .cp-breadcrumb — 단계 브레드크럼 바
+   .cp-topbar 아래 고정 (top: var(--bar-h))
+══════════════════════════════════════════════ */
+.cp-breadcrumb {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  padding: 8px 20px;
+  background: var(--bg2);
+  border-bottom: 1px solid var(--line);
+  font-family: 'Pretendard', 'Apple SD Gothic Neo', 'Malgun Gothic', system-ui, sans-serif;
+  font-size: 12px;
+  flex-wrap: wrap;
+}
+
+.cp-breadcrumb-item {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  color: var(--muted);
+  white-space: nowrap;
+}
+
+.cp-breadcrumb-item.active {
+  color: var(--text);
+  font-weight: 700;
+}
+
+.cp-breadcrumb-item.done {
+  color: var(--teal);
+}
+
+.cp-breadcrumb-item .step-num {
+  width: 18px; height: 18px;
+  border-radius: 50%;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 10px;
+  font-weight: 700;
+  background: var(--line);
+  color: var(--muted);
+  flex-shrink: 0;
+}
+
+.cp-breadcrumb-item.active .step-num {
+  background: var(--navy);
+  color: #fff;
+}
+
+.cp-breadcrumb-item.done .step-num {
+  background: var(--teal);
+  color: #fff;
+}
+
+.cp-breadcrumb-arrow {
+  color: var(--line);
+  font-size: 14px;
+}
+
+/* ══════════════════════════════════════════════
+   5. .cp-summary-box — 이전 단계 데이터 요약 박스
+   inquiry.html, roadmap.html 상단에 표시
+══════════════════════════════════════════════ */
+.cp-summary-box {
+  background: linear-gradient(135deg, #f0f9ff 0%, var(--teal2) 100%);
+  border: 1.5px solid #b3e8e2;
+  border-radius: var(--r);
+  padding: 16px 20px;
+  margin-bottom: 20px;
+  font-family: 'Pretendard', 'Apple SD Gothic Neo', 'Malgun Gothic', system-ui, sans-serif;
+  animation: cpFadeIn .4s ease;
+}
+
+.cp-summary-box-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 10px;
+}
+
+.cp-summary-box-title {
+  font-size: 13px;
+  font-weight: 800;
+  color: var(--teal3);
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.cp-summary-box-edit {
+  font-size: 11px;
+  color: var(--muted);
+  text-decoration: underline;
+  cursor: pointer;
+  background: none;
+  border: none;
+  font-family: inherit;
+  padding: 0;
+}
+
+.cp-summary-box-edit:hover { color: var(--teal); }
+
+.cp-summary-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  gap: 8px;
+}
+
+.cp-summary-item {
+  font-size: 12px;
+  color: var(--text);
+  line-height: 1.5;
+}
+
+.cp-summary-item .label {
+  font-weight: 700;
+  color: var(--teal3);
+  margin-right: 4px;
+}
+
+.cp-summary-kw-wrap {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 5px;
+  margin-top: 6px;
+}
+
+.cp-summary-kw {
+  font-size: 11px;
+  font-weight: 600;
+  padding: 2px 9px;
+  border-radius: 99px;
+  background: rgba(22,163,148,.12);
+  color: var(--teal3);
+  border: 1px solid rgba(22,163,148,.25);
+}
+
+.cp-summary-question {
+  margin-top: 8px;
+  padding: 8px 12px;
+  background: rgba(255,255,255,.65);
+  border-radius: 8px;
+  font-size: 13px;
+  color: var(--text);
+  line-height: 1.6;
+  border-left: 3px solid var(--teal);
+}
+
+/* 데이터 없을 때 */
+.cp-summary-box.empty {
+  background: #fafafa;
+  border-color: var(--line);
+  text-align: center;
+  color: var(--muted);
+  font-size: 13px;
+  padding: 20px;
+}
+
+/* ══════════════════════════════════════════════
+   6. .cp-btn 계열 — 공통 버튼
+══════════════════════════════════════════════ */
+.cp-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  padding: 10px 22px;
+  border-radius: 10px;
+  font-size: 14px;
+  font-weight: 700;
+  border: none;
+  cursor: pointer;
+  transition: all .18s ease;
+  font-family: 'Pretendard', 'Apple SD Gothic Neo', 'Malgun Gothic', system-ui, sans-serif;
+  text-decoration: none;
+  white-space: nowrap;
+}
+
+.cp-btn:active { transform: scale(.97); }
+
+.cp-btn-primary {
+  background: var(--navy);
+  color: #fff;
+  box-shadow: 0 2px 12px rgba(15,31,61,.2);
+}
+.cp-btn-primary:hover {
+  background: var(--navy2);
+  box-shadow: 0 4px 18px rgba(15,31,61,.28);
+  transform: translateY(-1px);
+}
+
+.cp-btn-teal {
+  background: var(--teal);
+  color: #fff;
+  box-shadow: 0 2px 10px rgba(22,163,148,.25);
+}
+.cp-btn-teal:hover {
+  background: var(--teal3);
+  box-shadow: 0 4px 16px rgba(22,163,148,.35);
+  transform: translateY(-1px);
+}
+
+.cp-btn-gold {
+  background: var(--gold);
+  color: var(--navy);
+  box-shadow: 0 2px 10px rgba(244,196,48,.3);
+}
+.cp-btn-gold:hover {
+  background: #e6b820;
+  transform: translateY(-1px);
+}
+
+.cp-btn-ghost {
+  background: transparent;
+  color: var(--navy);
+  border: 1.5px solid var(--line);
+}
+.cp-btn-ghost:hover {
+  background: var(--bg2);
+  border-color: var(--navy2);
+}
+
+.cp-btn-danger {
+  background: transparent;
+  color: var(--red);
+  border: 1.5px solid #fecaca;
+}
+.cp-btn-danger:hover {
+  background: var(--redL);
+}
+
+.cp-btn-sm {
+  padding: 6px 14px;
+  font-size: 12px;
+  border-radius: 8px;
+}
+
+.cp-btn-lg {
+  padding: 14px 32px;
+  font-size: 16px;
+  border-radius: 12px;
+}
+
+/* 전송 버튼 — 다음 단계로 이동 */
+.cp-btn-next {
+  background: linear-gradient(135deg, var(--teal) 0%, var(--teal3) 100%);
+  color: #fff;
+  box-shadow: 0 4px 18px rgba(22,163,148,.35);
+}
+.cp-btn-next:hover {
+  box-shadow: 0 6px 24px rgba(22,163,148,.45);
+  transform: translateY(-2px);
+}
+
+/* ══════════════════════════════════════════════
+   7. 공통 애니메이션
+══════════════════════════════════════════════ */
+@keyframes cpFadeIn {
+  from { opacity: 0; transform: translateY(8px); }
+  to   { opacity: 1; transform: none; }
+}
+
+@keyframes cpSlideDown {
+  from { opacity: 0; max-height: 0; }
+  to   { opacity: 1; max-height: 500px; }
+}
+
+/* ══════════════════════════════════════════════
+   8. 각 페이지에서 cp-topbar 높이만큼 body 패딩 조정용
+   사용: body에 .has-cp-topbar 클래스 추가
+══════════════════════════════════════════════ */
+body.has-cp-topbar {
+  padding-top: var(--bar-h);
+}
+
+/* ══════════════════════════════════════════════
+   9. 반응형
+══════════════════════════════════════════════ */
+@media (max-width: 600px) {
+  .cp-topbar { padding: 0 12px; gap: 8px; }
+  .cp-topbar-logo { font-size: 12px; }
+  .cp-step-pill { display: none; }
+  .cp-summary-grid { grid-template-columns: 1fr; }
+  .cp-btn-lg { padding: 12px 24px; font-size: 15px; }
+}

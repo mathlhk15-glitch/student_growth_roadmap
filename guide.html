@@ -1,0 +1,829 @@
+<!DOCTYPE html>
+<html lang="ko">
+<!-- 규 · 진로탐구 성장 플랫폼 가이드 -->
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="author" content="규">
+<title>사용 가이드 — 진로탐구 성장 플랫폼</title>
+<link rel="preconnect" href="https://cdn.jsdelivr.net">
+<link href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css" rel="stylesheet">
+<style>
+/* 규 · design tokens */
+:root {
+  --navy:    #0f1f3d;
+  --navy2:   #1b3260;
+  --teal:    #16a394;
+  --teal2:   #e7faf7;
+  --teal3:   #0d7a6e;
+  --gold:    #f4c430;
+  --blue:    #3b82f6;
+  --blueL:   #eff6ff;
+  --purple:  #7c3aed;
+  --purpleL: #f5f3ff;
+  --orange:  #f97316;
+  --orangeL: #fff7ed;
+  --green:   #16a34a;
+  --greenL:  #f0fdf4;
+  --red:     #dc2626;
+  --redL:    #fef2f2;
+  --bg:      #f8fafc;
+  --card:    #ffffff;
+  --text:    #1e293b;
+  --muted:   #64748b;
+  --line:    #e2e8f0;
+  --shadow:  0 4px 24px rgba(15,31,61,.07);
+  --shadow2: 0 8px 40px rgba(15,31,61,.13);
+  --r:       14px;
+  --r2:      20px;
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{
+  background:var(--bg);
+  color:var(--text);
+  font-family:'Pretendard','Apple SD Gothic Neo','Malgun Gothic',system-ui,sans-serif;
+  font-size:15px;line-height:1.75;word-break:keep-all;
+}
+a{color:var(--teal);text-decoration:none}
+a:hover{text-decoration:underline}
+
+/* ── 레이아웃 ── */
+.layout{display:flex;min-height:100vh}
+.sidebar{
+  width:240px;flex-shrink:0;background:var(--navy);
+  position:sticky;top:0;height:100vh;overflow-y:auto;
+  padding:24px 0;
+}
+.sidebar-logo{
+  padding:0 20px 20px;border-bottom:1px solid rgba(255,255,255,.1);
+  margin-bottom:12px;
+}
+.sidebar-logo-title{
+  font-size:13px;font-weight:800;color:#fff;letter-spacing:-.3px;line-height:1.4;
+}
+.sidebar-logo-sub{font-size:11px;color:rgba(255,255,255,.45);margin-top:3px}
+.sidebar-back{
+  display:flex;align-items:center;gap:6px;
+  font-size:12px;color:rgba(255,255,255,.55);
+  padding:6px 20px;margin-bottom:12px;
+  cursor:pointer;transition:color .15s;
+}
+.sidebar-back:hover{color:var(--gold)}
+.sidebar-section{font-size:10px;font-weight:800;letter-spacing:1.5px;color:rgba(255,255,255,.3);padding:16px 20px 6px;text-transform:uppercase}
+.sidebar-item{
+  display:block;padding:9px 20px;font-size:13px;color:rgba(255,255,255,.65);
+  cursor:pointer;transition:all .15s;border-left:3px solid transparent;
+}
+.sidebar-item:hover{color:#fff;background:rgba(255,255,255,.07)}
+.sidebar-item.active{color:#fff;background:rgba(22,163,148,.15);border-left-color:var(--teal)}
+.sidebar-item .num{display:inline-block;width:20px;font-size:11px;font-weight:700;opacity:.5}
+
+/* ── 본문 ── */
+.content{flex:1;max-width:800px;padding:40px 48px 80px;margin:0 auto}
+
+/* ── 섹션 공통 ── */
+.section{margin-bottom:64px}
+.section-anchor{scroll-margin-top:24px}
+.section-badge{
+  display:inline-flex;align-items:center;gap:6px;
+  font-size:11px;font-weight:800;letter-spacing:.5px;
+  padding:4px 12px;border-radius:99px;margin-bottom:14px;
+}
+.section-title{font-size:26px;font-weight:900;color:var(--navy);letter-spacing:-.5px;line-height:1.25;margin-bottom:8px}
+.section-desc{font-size:15px;color:var(--muted);line-height:1.8;margin-bottom:24px}
+
+/* ── 히어로 ── */
+.hero-section{
+  background:linear-gradient(135deg,var(--navy) 0%,#1b3a70 60%,#0d5c73 100%);
+  border-radius:var(--r2);padding:48px 44px;margin-bottom:48px;position:relative;overflow:hidden;
+}
+.hero-section::before{
+  content:'';position:absolute;inset:0;
+  background:radial-gradient(ellipse 60% 40% at 80% 20%,rgba(22,163,148,.25) 0%,transparent 60%),
+            radial-gradient(ellipse 40% 60% at 10% 80%,rgba(244,196,48,.1) 0%,transparent 50%);
+  pointer-events:none;
+}
+.hero-inner{position:relative;z-index:1}
+.hero-tag{display:inline-block;font-size:11px;font-weight:800;color:var(--gold);border:1.5px solid rgba(244,196,48,.35);padding:4px 14px;border-radius:99px;margin-bottom:16px;background:rgba(244,196,48,.08)}
+.hero-title{font-size:32px;font-weight:900;color:#fff;letter-spacing:-.8px;line-height:1.2;margin-bottom:12px}
+.hero-title em{font-style:normal;color:var(--gold)}
+.hero-desc{font-size:15px;color:rgba(255,255,255,.75);line-height:1.8;max-width:520px;margin-bottom:28px}
+.hero-pills{display:flex;flex-wrap:wrap;gap:8px}
+.pill{display:inline-block;background:rgba(255,255,255,.12);color:rgba(255,255,255,.85);font-size:12px;font-weight:600;padding:5px 14px;border-radius:99px;border:1px solid rgba(255,255,255,.15)}
+
+/* ── 카드 그리드 ── */
+.card-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:14px;margin-bottom:24px}
+.card{background:var(--card);border:1.5px solid var(--line);border-radius:var(--r);padding:20px;box-shadow:var(--shadow);transition:all .18s}
+.card:hover{transform:translateY(-2px);box-shadow:var(--shadow2)}
+.card-icon{font-size:28px;margin-bottom:10px}
+.card-title{font-size:14px;font-weight:800;color:var(--navy);margin-bottom:6px}
+.card-desc{font-size:13px;color:var(--muted);line-height:1.7}
+
+/* ── 스텝 타임라인 ── */
+.steps{display:flex;flex-direction:column;gap:0}
+.step-item{display:flex;gap:20px;position:relative}
+.step-item:not(:last-child)::after{
+  content:'';position:absolute;left:20px;top:44px;bottom:-16px;
+  width:2px;background:var(--line);
+}
+.step-num{
+  width:40px;height:40px;flex-shrink:0;
+  background:var(--navy);color:#fff;border-radius:50%;
+  display:flex;align-items:center;justify-content:center;
+  font-size:14px;font-weight:800;position:relative;z-index:1;
+}
+.step-body{flex:1;padding-bottom:28px}
+.step-title{font-size:15px;font-weight:800;color:var(--navy);margin-bottom:5px;margin-top:7px}
+.step-desc{font-size:14px;color:var(--muted);line-height:1.75}
+.step-tip{
+  display:inline-block;margin-top:8px;
+  background:var(--teal2);color:var(--teal3);
+  font-size:12px;font-weight:600;padding:5px 12px;border-radius:8px;line-height:1.6;
+}
+
+/* ── 스크린 카드 ── */
+.screen-card{background:var(--card);border:1.5px solid var(--line);border-radius:var(--r2);overflow:hidden;box-shadow:var(--shadow);margin-bottom:20px}
+.screen-header{
+  padding:16px 24px;border-bottom:1px solid var(--line);
+  display:flex;align-items:center;gap:12px;
+}
+.screen-badge{font-size:11px;font-weight:800;padding:3px 10px;border-radius:99px}
+.screen-header-title{font-size:15px;font-weight:800;color:var(--navy)}
+.screen-body{padding:20px 24px}
+.screen-body p{font-size:14px;color:var(--muted);line-height:1.8;margin-bottom:12px}
+.screen-body p:last-child{margin-bottom:0}
+.feature-list{list-style:none;display:flex;flex-direction:column;gap:8px;margin-top:10px}
+.feature-list li{
+  display:flex;align-items:flex-start;gap:10px;
+  font-size:14px;color:var(--text);line-height:1.65;
+}
+.feature-list li::before{content:'✦';color:var(--teal);font-size:11px;margin-top:3px;flex-shrink:0}
+
+/* ── 콜아웃 박스 ── */
+.callout{border-radius:var(--r);padding:16px 20px;margin:16px 0;display:flex;gap:12px;align-items:flex-start}
+.callout.tip{background:var(--teal2);border-left:4px solid var(--teal)}
+.callout.warn{background:var(--orangeL);border-left:4px solid var(--orange)}
+.callout.info{background:var(--blueL);border-left:4px solid var(--blue)}
+.callout.success{background:var(--greenL);border-left:4px solid var(--green)}
+.callout-icon{font-size:18px;flex-shrink:0;line-height:1.4}
+.callout-body{font-size:14px;color:var(--text);line-height:1.75}
+.callout-body strong{font-weight:800}
+
+/* ── 시나리오 카드 ── */
+.scenario{background:var(--card);border:1.5px solid var(--line);border-radius:var(--r);padding:24px;box-shadow:var(--shadow);margin-bottom:16px}
+.scenario-title{font-size:15px;font-weight:800;color:var(--navy);margin-bottom:12px;display:flex;align-items:center;gap:8px}
+.scenario-steps{display:flex;flex-direction:column;gap:8px}
+.scenario-step{
+  display:flex;align-items:flex-start;gap:12px;
+  background:var(--bg);border-radius:10px;padding:10px 14px;
+}
+.s-num{width:24px;height:24px;flex-shrink:0;background:var(--navy);color:#fff;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:800}
+.s-body{font-size:13px;color:var(--text);line-height:1.65}
+.s-body strong{color:var(--navy);font-weight:700}
+
+/* ── FAQ ── */
+.faq-item{border:1.5px solid var(--line);border-radius:var(--r);overflow:hidden;margin-bottom:10px}
+.faq-q{
+  padding:16px 20px;background:var(--card);cursor:pointer;
+  display:flex;justify-content:space-between;align-items:center;
+  font-size:14px;font-weight:700;color:var(--navy);transition:background .15s;
+  user-select:none;
+}
+.faq-q:hover{background:var(--bg)}
+.faq-q .arrow{font-size:12px;transition:transform .2s;color:var(--muted)}
+.faq-item.open .faq-q .arrow{transform:rotate(180deg)}
+.faq-a{
+  padding:0 20px;max-height:0;overflow:hidden;
+  font-size:14px;color:var(--muted);line-height:1.8;
+  transition:max-height .3s ease,padding .3s;
+}
+.faq-item.open .faq-a{max-height:500px;padding:12px 20px 18px}
+
+/* ── 단축키 테이블 ── */
+.table-wrap{overflow-x:auto;margin:16px 0}
+table{width:100%;border-collapse:collapse;font-size:14px}
+th{background:var(--navy);color:#fff;padding:10px 16px;text-align:left;font-weight:700;font-size:13px}
+td{padding:10px 16px;border-bottom:1px solid var(--line);color:var(--text)}
+tr:last-child td{border-bottom:none}
+tr:hover td{background:var(--bg)}
+.kbd{background:#1e293b;color:#e2e8f0;font-size:12px;font-weight:600;padding:2px 8px;border-radius:5px;font-family:monospace}
+
+/* ── 버튼 ── */
+.btn-start{
+  display:inline-flex;align-items:center;gap:8px;
+  background:var(--teal);color:#fff;border:none;border-radius:12px;
+  padding:12px 24px;font-size:14px;font-weight:700;cursor:pointer;
+  transition:background .15s;text-decoration:none;
+}
+.btn-start:hover{background:var(--teal3);text-decoration:none;color:#fff}
+
+/* ── 푸터 ── */
+.guide-footer{
+  border-top:1px solid var(--line);padding:24px 0;
+  text-align:center;font-size:12px;color:var(--muted);
+}
+
+/* ── 모바일 ── */
+@media(max-width:800px){
+  .layout{flex-direction:column}
+  .sidebar{width:100%;height:auto;position:static;padding:16px 0}
+  .sidebar-logo{padding:0 16px 16px}
+  .content{padding:24px 20px 60px}
+  .hero-section{padding:32px 24px}
+  .hero-title{font-size:24px}
+  .card-grid{grid-template-columns:1fr}
+}
+</style>
+</head>
+<body>
+<div class="layout">
+
+  <!-- ── 사이드바 ── -->
+  <nav class="sidebar">
+    <div class="sidebar-logo">
+      <div class="sidebar-logo-title">진로탐구 성장 플랫폼</div>
+      <div class="sidebar-logo-sub">사용 가이드 v6</div>
+    </div>
+    <a href="index.html" class="sidebar-back">← 플랫폼으로 돌아가기</a>
+
+    <div class="sidebar-section">시작하기</div>
+    <a class="sidebar-item" onclick="scrollTo('intro')"><span class="num">①</span> 이런 선생님께 추천</a>
+    <a class="sidebar-item" onclick="scrollTo('quickstart')"><span class="num">②</span> 5분 빠른 시작</a>
+    <a class="sidebar-item" onclick="scrollTo('overview')"><span class="num">③</span> 전체 흐름 한눈에</a>
+
+    <div class="sidebar-section">화면 설명</div>
+    <a class="sidebar-item" onclick="scrollTo('hub')"><span class="num">④</span> 허브(메인 화면)</a>
+    <a class="sidebar-item" onclick="scrollTo('step1')"><span class="num">⑤</span> STEP 1 키워드 생성</a>
+    <a class="sidebar-item" onclick="scrollTo('step2')"><span class="num">⑥</span> STEP 2 탐구 설계</a>
+    <a class="sidebar-item" onclick="scrollTo('step3')"><span class="num">⑦</span> STEP 3 성장 로드맵</a>
+
+    <div class="sidebar-section">활용 시나리오</div>
+    <a class="sidebar-item" onclick="scrollTo('teacher-solo')"><span class="num">⑧</span> 교사 혼자 쓰기</a>
+    <a class="sidebar-item" onclick="scrollTo('with-student')"><span class="num">⑨</span> 학생과 함께</a>
+    <a class="sidebar-item" onclick="scrollTo('data')"><span class="num">⑩</span> 데이터 관리</a>
+
+    <div class="sidebar-section">도움말</div>
+    <a class="sidebar-item" onclick="scrollTo('faq')"><span class="num">⑪</span> 자주 묻는 질문</a>
+    <a class="sidebar-item" onclick="scrollTo('tips')"><span class="num">⑫</span> 활용 팁</a>
+  </nav>
+
+  <!-- ── 본문 ── -->
+  <main class="content">
+
+    <!-- 히어로 -->
+    <div class="hero-section">
+      <div class="hero-inner">
+        <div class="hero-tag">진로탐구 성장 플랫폼 · 사용 가이드</div>
+        <h1 class="hero-title">처음 써도<br><em>5분이면</em> 시작됩니다</h1>
+        <p class="hero-desc">
+          학생의 진로 탐구부터 학생부 세특 방향 설계까지,<br>
+          이 가이드 한 장으로 충분합니다.
+        </p>
+        <div class="hero-pills">
+          <span class="pill">📂 설치 불필요</span>
+          <span class="pill">🔒 인터넷 연결 없이 사용 가능</span>
+          <span class="pill">👤 학생 데이터 외부 전송 없음</span>
+          <span class="pill">🆓 완전 무료</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- ① 이런 선생님께 추천 -->
+    <div class="section section-anchor" id="intro">
+      <div class="section-badge" style="background:#fef9ec;color:#a16207">💡 소개</div>
+      <h2 class="section-title">이런 선생님께 딱 맞습니다</h2>
+      <p class="section-desc">진로 상담 경력과 상관없이, 아래 상황 중 하나라도 해당된다면 바로 시작할 수 있습니다.</p>
+      <div class="card-grid">
+        <div class="card">
+          <div class="card-icon">😅</div>
+          <div class="card-title">세특을 뭐라 써야 할지<br>막막할 때</div>
+          <div class="card-desc">학생 정보를 입력하면 AI가 세특 방향을 자동으로 제안해줍니다.</div>
+        </div>
+        <div class="card">
+          <div class="card-icon">🗓️</div>
+          <div class="card-title">상담 시간 30분 안에<br>끝내고 싶을 때</div>
+          <div class="card-desc">교사 진단 모드로 진입하면 학생부 분석부터 결과까지 빠르게 처리됩니다.</div>
+        </div>
+        <div class="card">
+          <div class="card-icon">📋</div>
+          <div class="card-title">교과 선생님께 협조<br>요청이 어색할 때</div>
+          <div class="card-desc">협조 시트가 자동으로 만들어집니다. 복사해서 바로 전달하세요.</div>
+        </div>
+        <div class="card">
+          <div class="card-icon">🧑‍🎓</div>
+          <div class="card-title">학생이 탐구 주제를<br>못 잡을 때</div>
+          <div class="card-desc">198개 학과별 키워드로 학생 스스로 질문을 만들게 합니다.</div>
+        </div>
+        <div class="card">
+          <div class="card-icon">💾</div>
+          <div class="card-title">학생 상담 내용을<br>기록으로 남기고 싶을 때</div>
+          <div class="card-desc">JSON 저장으로 학생별 데이터를 체계적으로 보관합니다.</div>
+        </div>
+        <div class="card">
+          <div class="card-icon">🏫</div>
+          <div class="card-title">교내 컴퓨터에서만<br>써야 할 때</div>
+          <div class="card-desc">인터넷 없이도 대부분의 기능이 작동합니다. 설치도 필요 없습니다.</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ② 5분 빠른 시작 -->
+    <div class="section section-anchor" id="quickstart">
+      <div class="section-badge" style="background:var(--teal2);color:var(--teal3)">⚡ 빠른 시작</div>
+      <h2 class="section-title">딱 5분, 지금 바로 시작하세요</h2>
+      <p class="section-desc">처음 사용하는 분을 위한 최단 경로입니다.</p>
+
+      <div class="steps">
+        <div class="step-item">
+          <div class="step-num" style="background:var(--teal)">1</div>
+          <div class="step-body">
+            <div class="step-title">index.html 파일을 더블클릭해서 여세요</div>
+            <div class="step-desc">별도 설치나 서버가 필요 없습니다. 파일을 그냥 열면 됩니다.<br>크롬(Chrome) 브라우저를 추천합니다.</div>
+            <div class="step-tip">💡 즐겨찾기에 추가해두면 다음부터 바로 열 수 있어요</div>
+          </div>
+        </div>
+        <div class="step-item">
+          <div class="step-num" style="background:var(--blue)">2</div>
+          <div class="step-body">
+            <div class="step-title">화면에서 '새 학생 추가' 버튼을 클릭하세요</div>
+            <div class="step-desc">학생 이름, 학년, 반, 번호, 진로 관심 분야를 간단히 입력합니다.<br>이름만 입력해도 시작할 수 있습니다.</div>
+            <div class="step-tip">💡 지금은 상담할 학생 한 명만 등록해도 충분합니다</div>
+          </div>
+        </div>
+        <div class="step-item">
+          <div class="step-num" style="background:var(--purple)">3</div>
+          <div class="step-body">
+            <div class="step-title">오른쪽 '교사 진단 시작' 버튼을 클릭하세요</div>
+            <div class="step-desc">학생부 내용을 직접 붙여넣거나, STEP 1→2→3 순서로 학생과 함께 진행할 수 있습니다.<br>처음에는 '교사 진단 시작'이 가장 빠릅니다.</div>
+          </div>
+        </div>
+        <div class="step-item">
+          <div class="step-num" style="background:var(--orange)">4</div>
+          <div class="step-body">
+            <div class="step-title">STEP 3 로드맵에서 AI 프롬프트를 복사하세요</div>
+            <div class="step-desc">화면에 생성된 프롬프트를 복사해서 Claude, ChatGPT 등 AI에 붙여넣으면<br>세특 방향, 추천 활동, 면접 질문 등이 자동으로 만들어집니다.</div>
+            <div class="step-tip">✅ 여기까지가 첫 사용입니다! 총 5분이면 됩니다</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="callout tip">
+        <div class="callout-icon">🎯</div>
+        <div class="callout-body">
+          <strong>첫 번째 상담 후에는 반드시 저장하세요.</strong><br>
+          허브(메인 화면)로 돌아와서 '현재 학생 저장' 버튼을 눌러 JSON 파일로 백업해두세요.
+          다음에 그 파일을 불러오면 이어서 작업할 수 있습니다.
+        </div>
+      </div>
+    </div>
+
+    <!-- ③ 전체 흐름 -->
+    <div class="section section-anchor" id="overview">
+      <div class="section-badge" style="background:var(--blueL);color:#1d4ed8">🗺 전체 흐름</div>
+      <h2 class="section-title">3단계로 이루어집니다</h2>
+      <p class="section-desc">학생과 함께 할 때, 교사 혼자 할 때 모두 같은 3단계입니다.</p>
+
+      <div class="card-grid" style="grid-template-columns:repeat(3,1fr)">
+        <div class="card" style="border-color:#bfdbfe;background:linear-gradient(135deg,#eff6ff,#fff)">
+          <div style="font-size:11px;font-weight:800;color:#1d4ed8;margin-bottom:8px">STEP 1</div>
+          <div class="card-icon">🔑</div>
+          <div class="card-title">학과별 핵심키워드<br>탐구 질문 생성기</div>
+          <div class="card-desc">7계열 198개 학과 키워드 → 학생이 나만의 질문 3개 작성</div>
+        </div>
+        <div class="card" style="border-color:#ddd6fe;background:linear-gradient(135deg,#f5f3ff,#fff)">
+          <div style="font-size:11px;font-weight:800;color:#6d28d9;margin-bottom:8px">STEP 2</div>
+          <div class="card-icon">✏️</div>
+          <div class="card-title">나만의 탐구 설계<br>기록하기</div>
+          <div class="card-desc">탐구 동기 → 방법 → 산출물 → 기록 근거 → 성찰</div>
+        </div>
+        <div class="card" style="border-color:#99f6e4;background:linear-gradient(135deg,var(--teal2),#fff)">
+          <div style="font-size:11px;font-weight:800;color:var(--teal3);margin-bottom:8px">STEP 3</div>
+          <div class="card-icon">📊</div>
+          <div class="card-title">학생부 성장<br>로드맵</div>
+          <div class="card-desc">학생부 GAP 분석 + AI 프롬프트 생성 + 세특·면접 전략</div>
+        </div>
+      </div>
+
+      <div class="callout info">
+        <div class="callout-icon">ℹ️</div>
+        <div class="callout-body">
+          <strong>꼭 1→2→3 순서로 할 필요는 없습니다.</strong><br>
+          교사 혼자 진단할 때는 STEP 3만 사용해도 되고, 
+          학생과 수업 시간에는 STEP 1→2만 해도 충분합니다.
+          각 단계는 독립적으로 작동합니다.
+        </div>
+      </div>
+    </div>
+
+    <!-- ④ 허브 -->
+    <div class="section section-anchor" id="hub">
+      <div class="section-badge" style="background:#f1f5f9;color:var(--navy)">🏠 화면 설명</div>
+      <h2 class="section-title">허브 — 메인 화면</h2>
+
+      <div class="screen-card">
+        <div class="screen-header">
+          <span class="screen-badge" style="background:var(--navy);color:#fff">메인</span>
+          <span class="screen-header-title">index.html — 플랫폼의 출발점</span>
+        </div>
+        <div class="screen-body">
+          <p>모든 작업이 이 화면에서 시작됩니다. 학생 목록 관리, 단계별 이동, 데이터 저장·불러오기가 여기 모여 있습니다.</p>
+          <ul class="feature-list">
+            <li><strong>학생 목록</strong> — 등록된 학생 카드가 나열됩니다. 카드를 클릭하면 해당 학생의 데이터로 전환됩니다.</li>
+            <li><strong>새 학생 추가</strong> — 파란색 버튼. 이름·학년·반·번호·진로 관심 분야를 입력합니다.</li>
+            <li><strong>학생 탐구 시작</strong> — 학생과 함께 STEP 1부터 순서대로 진행합니다.</li>
+            <li><strong>교사 진단 시작</strong> — 교사 혼자 STEP 3(로드맵)으로 바로 이동합니다.</li>
+            <li><strong>교과교사 협조 시트</strong> — 탐구 데이터가 있을 때 자동 표시됩니다. 복사하거나 HTML로 저장해 교과 선생님께 전달합니다.</li>
+            <li><strong>현재 학생 저장</strong> — JSON 파일로 개별 백업합니다.</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="callout warn">
+        <div class="callout-icon">⚠️</div>
+        <div class="callout-body">
+          <strong>데이터는 이 컴퓨터의 브라우저에만 저장됩니다.</strong><br>
+          다른 컴퓨터에서 쓰거나 브라우저 캐시를 지우면 데이터가 사라질 수 있습니다.
+          사용 후에는 반드시 <strong>JSON 저장</strong>으로 백업하세요.
+        </div>
+      </div>
+    </div>
+
+    <!-- ⑤ STEP 1 -->
+    <div class="section section-anchor" id="step1">
+      <div class="section-badge" style="background:#dbeafe;color:#1d4ed8">STEP 1</div>
+      <h2 class="section-title">학과별 핵심키워드 탐구 질문 생성기</h2>
+
+      <div class="screen-card">
+        <div class="screen-header">
+          <span class="screen-badge" style="background:#dbeafe;color:#1d4ed8">STEP 1</span>
+          <span class="screen-header-title">keyword.html</span>
+        </div>
+        <div class="screen-body">
+          <p>7계열 198개 학과의 대학 강의 키워드가 담겨 있습니다. 학생이 희망 학과를 선택하고 키워드를 클릭하면, 그 키워드로 나만의 탐구 질문 3개를 작성하게 됩니다.</p>
+          <ul class="feature-list">
+            <li><strong>계열 선택</strong> — 인문, 사회, 자연, 공학, 의약, 예체능, 교육 중 선택합니다.</li>
+            <li><strong>학과 검색</strong> — 상단 검색창에 학과명을 입력하면 바로 필터됩니다.</li>
+            <li><strong>키워드 클릭</strong> — 관심 있는 키워드를 최대 5개까지 선택합니다.</li>
+            <li><strong>질문 작성</strong> — 선택한 키워드를 바탕으로 '왜?', '어떻게?', '만약에?' 형태의 질문 3개를 씁니다.</li>
+            <li><strong>탐구 설계로 보내기</strong> — 버튼 클릭 시 데이터가 STEP 2로 자동 전달됩니다.</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="callout tip">
+        <div class="callout-icon">💡</div>
+        <div class="callout-body">
+          <strong>질문을 잘 못 쓰는 학생에게는 이렇게 안내하세요.</strong><br>
+          "이 키워드가 왜 중요할까요?" → "이 문제를 어떻게 해결할 수 있을까요?" → "만약 내가 이 분야 연구자라면 무엇을 먼저 해볼까요?"
+          이 세 가지 템플릿을 칠판에 써주면 학생 대부분이 혼자 씁니다.
+        </div>
+      </div>
+    </div>
+
+    <!-- ⑥ STEP 2 -->
+    <div class="section section-anchor" id="step2">
+      <div class="section-badge" style="background:#f5f3ff;color:#6d28d9">STEP 2</div>
+      <h2 class="section-title">나만의 탐구 설계 기록하기</h2>
+
+      <div class="screen-card">
+        <div class="screen-header">
+          <span class="screen-badge" style="background:#f5f3ff;color:#6d28d9">STEP 2</span>
+          <span class="screen-header-title">inquiry.html</span>
+        </div>
+        <div class="screen-body">
+          <p>STEP 1에서 만든 질문을 바탕으로 탐구 계획 전체를 설계하는 화면입니다. 단계별로 칸을 채우면 자동으로 최종 탐구 계획서가 완성됩니다.</p>
+          <ul class="feature-list">
+            <li><strong>탐구 주제 정하기</strong> — STEP 1의 질문 중 하나를 선택하거나 새로 작성합니다.</li>
+            <li><strong>탐구 동기</strong> — 왜 이 주제를 탐구하고 싶은지 적습니다. (2~3문장이면 충분)</li>
+            <li><strong>관련 교과·개념</strong> — 이 탐구와 연결되는 교과목과 핵심 개념을 입력합니다.</li>
+            <li><strong>탐구 방법·산출물</strong> — 어떻게 조사하고 무엇을 만들지 정합니다.</li>
+            <li><strong>학생부 기록 근거</strong> — ⭐ 가장 중요한 칸. 교사가 관찰할 수 있는 구체적 장면을 씁니다.</li>
+            <li><strong>로드맵으로 보내기</strong> — STEP 3으로 데이터가 전달됩니다.</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="callout success">
+        <div class="callout-icon">⭐</div>
+        <div class="callout-body">
+          <strong>'학생부 기록 근거' 칸이 핵심입니다.</strong><br>
+          예시: "수업 중 관련 논문 2편 분석 결과를 발표함", "실험 오차 원인을 스스로 설명하고 개선 방안을 제안함"
+          — 이런 내용이 있어야 교과 선생님이 실제로 세특에 쓸 수 있습니다.
+        </div>
+      </div>
+    </div>
+
+    <!-- ⑦ STEP 3 -->
+    <div class="section section-anchor" id="step3">
+      <div class="section-badge" style="background:var(--teal2);color:var(--teal3)">STEP 3</div>
+      <h2 class="section-title">학생부 성장 로드맵</h2>
+
+      <div class="screen-card">
+        <div class="screen-header">
+          <span class="screen-badge" style="background:var(--teal2);color:var(--teal3)">STEP 3</span>
+          <span class="screen-header-title">roadmap.html — 진로진학 상담의 핵심</span>
+        </div>
+        <div class="screen-body">
+          <p>학생부 PDF를 업로드하거나 텍스트를 붙여넣으면 AI가 분석할 수 있는 프롬프트가 자동 생성됩니다. 이 화면이 이 플랫폼의 핵심입니다.</p>
+          <ul class="feature-list">
+            <li><strong>학생부 입력</strong> — PDF 파일을 드래그하거나 텍스트를 직접 붙여넣습니다.</li>
+            <li><strong>자동 분류</strong> — 학생부 내용이 교과별·세특별로 자동 정리됩니다.</li>
+            <li><strong>AI 프롬프트 생성</strong> — '프롬프트 복사' 버튼을 클릭해서 생성된 내용을 Claude/ChatGPT에 붙여넣습니다.</li>
+            <li><strong>결과 입력</strong> — AI가 준 JSON 응답을 복사해서 결과 입력창에 붙여넣습니다.</li>
+            <li><strong>결과 확인</strong> — 추천 활동, 세특 전략, 면접 예상 질문이 카드로 정리됩니다.</li>
+            <li><strong>교과교사 협조 시트</strong> — 화면 하단에서 바로 복사해 관련 교과 선생님께 공유합니다.</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="callout info">
+        <div class="callout-icon">🤖</div>
+        <div class="callout-body">
+          <strong>AI를 어떻게 써야 하나요?</strong><br>
+          ① '프롬프트 복사' 버튼 클릭 → ② Claude.ai 또는 ChatGPT 열기 → ③ 붙여넣기 → ④ AI 답변 전체 복사 → ⑤ 결과 입력창에 붙여넣기 → ⑥ '적용' 버튼<br>
+          처음 한 번만 해보면 그 다음부터는 2분이면 됩니다.
+        </div>
+      </div>
+    </div>
+
+    <!-- ⑧ 교사 혼자 시나리오 -->
+    <div class="section section-anchor" id="teacher-solo">
+      <div class="section-badge" style="background:#fef9ec;color:#a16207">📋 활용 시나리오</div>
+      <h2 class="section-title">교사 혼자 사용하기</h2>
+      <p class="section-desc">학생이 없어도 교사 혼자 상담을 준비할 수 있습니다. 가장 빠른 방법입니다.</p>
+
+      <div class="scenario">
+        <div class="scenario-title">📌 상담 전날 밤 10분 준비</div>
+        <div class="scenario-steps">
+          <div class="scenario-step"><div class="s-num">1</div><div class="s-body">index.html 열기 → <strong>새 학생 추가</strong> → 학생 이름·학년 입력</div></div>
+          <div class="scenario-step"><div class="s-num">2</div><div class="s-body"><strong>교사 진단 시작</strong> 클릭 → STEP 3 로드맵으로 이동</div></div>
+          <div class="scenario-step"><div class="s-num">3</div><div class="s-body">학생부 파일 업로드 또는 주요 세특 내용 복사·붙여넣기</div></div>
+          <div class="scenario-step"><div class="s-num">4</div><div class="s-body"><strong>프롬프트 복사</strong> → AI에 붙여넣기 → 결과 받기 → 입력창에 붙여넣기</div></div>
+          <div class="scenario-step"><div class="s-num">5</div><div class="s-body">추천 활동·세특 전략 카드 확인 → 상담 메모 작성</div></div>
+          <div class="scenario-step"><div class="s-num">6</div><div class="s-body">허브로 돌아가기 → <strong>현재 학생 저장</strong> (JSON 백업)</div></div>
+        </div>
+      </div>
+
+      <div class="scenario">
+        <div class="scenario-title">📌 여러 학생 순서대로 상담할 때</div>
+        <div class="scenario-steps">
+          <div class="scenario-step"><div class="s-num">1</div><div class="s-body">상담 전 모든 학생 등록 (이름·학년만 입력해도 됨)</div></div>
+          <div class="scenario-step"><div class="s-num">2</div><div class="s-body">학생 카드 클릭으로 전환 → 해당 학생 데이터로 바뀜</div></div>
+          <div class="scenario-step"><div class="s-num">3</div><div class="s-body">상담 완료 후 바로 <strong>현재 학생 저장</strong> → 다음 학생 클릭</div></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ⑨ 학생과 함께 -->
+    <div class="section section-anchor" id="with-student">
+      <div class="section-badge" style="background:var(--purpleL);color:var(--purple)">🎓 학생과 함께</div>
+      <h2 class="section-title">학생과 함께 사용하기</h2>
+      <p class="section-desc">수업 시간, 진로 특강, 방과후 등에서 학생이 직접 입력하게 할 수 있습니다.</p>
+
+      <div class="scenario">
+        <div class="scenario-title">📌 1차시 수업 활용 (STEP 1 + 2)</div>
+        <div class="scenario-steps">
+          <div class="scenario-step"><div class="s-num">1</div><div class="s-body">index.html 열기 → 학생 이름 입력 → <strong>학생 탐구 시작</strong></div></div>
+          <div class="scenario-step"><div class="s-num">2</div><div class="s-body">STEP 1: 희망 학과 선택 → 키워드 5개 선택 → 질문 3개 작성 (약 15분)</div></div>
+          <div class="scenario-step"><div class="s-num">3</div><div class="s-body"><strong>탐구 설계로 보내기</strong> 클릭 → STEP 2 화면으로 자동 이동</div></div>
+          <div class="scenario-step"><div class="s-num">4</div><div class="s-body">탐구 주제·동기·방법·산출물 작성 (약 20분)</div></div>
+          <div class="scenario-step"><div class="s-num">5</div><div class="s-body">수업 종료 전 허브로 돌아와 <strong>현재 학생 저장</strong></div></div>
+        </div>
+      </div>
+
+      <div class="callout tip">
+        <div class="callout-icon">💡</div>
+        <div class="callout-body">
+          <strong>학생이 JSON 파일로 저장하게 하면 숙제로 활용할 수 있습니다.</strong><br>
+          수업 중 저장한 JSON 파일을 이메일·클래스룸으로 제출하게 하고,
+          다음 시간에 '학생 불러오기'로 이어서 진행하세요.
+        </div>
+      </div>
+    </div>
+
+    <!-- ⑩ 데이터 관리 -->
+    <div class="section section-anchor" id="data">
+      <div class="section-badge" style="background:var(--greenL);color:var(--green)">💾 데이터 관리</div>
+      <h2 class="section-title">데이터 저장과 불러오기</h2>
+
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr><th>상황</th><th>해야 할 일</th><th>버튼 위치</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>오늘 상담 끝남</td><td>현재 학생 저장 (JSON)</td><td>허브 → 데이터 관리</td></tr>
+            <tr><td>다른 컴퓨터에서 이어서</td><td>JSON 파일을 USB로 옮긴 뒤 '학생 불러오기'</td><td>허브 → 데이터 관리</td></tr>
+            <tr><td>학년도 말 전체 백업</td><td>전체 내보내기 (JSON)</td><td>허브 → 데이터 관리</td></tr>
+            <tr><td>v3에서 업그레이드</td><td>기존 JSON 파일 그대로 불러오기</td><td>자동 변환됨</td></tr>
+            <tr><td>학생 데이터 삭제</td><td>학생 카드 우측 🗑 버튼</td><td>학생 목록 카드</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+
+      <div style="margin-top:16px;background:#f8fafc;border:1.5px solid var(--line);border-radius:var(--r);padding:16px 20px">
+        <div style="font-size:13px;font-weight:800;color:var(--navy);margin-bottom:10px">📋 CSV 학생 명단 불러오기 형식 (v5+)</div>
+        <p style="font-size:13px;color:var(--muted);margin-bottom:10px">허브 화면의 <strong>'명단 불러오기'</strong> 버튼으로 학생 명단을 한 번에 등록할 수 있습니다.</p>
+        <div style="background:#1e293b;border-radius:8px;padding:14px 16px;font-family:monospace;font-size:13px;color:#e2e8f0;line-height:1.8">
+          학년,반,번호,이름,희망진로<br>
+          1,3,12,김민준,전자공학<br>
+          1,3,13,이서연,간호학<br>
+          2,1,5,"박지호","경영학, 창업"
+        </div>
+        <div style="margin-top:10px;padding:10px 14px;background:#fff7ed;border-radius:8px;font-size:13px;color:#92400e;line-height:1.7">
+          <strong>⚠️ CSV 작성 주의사항</strong><br>
+          • 첫 줄은 반드시 헤더(학년,반,번호,이름,희망진로)로 시작하세요<br>
+          • 각 칸에 쉼표(,)가 포함될 경우 큰따옴표로 감싸세요: <code>"경영학, 창업"</code><br>
+          • 파일 인코딩은 UTF-8로 저장하세요 (Excel: 다른 이름으로 저장 → CSV UTF-8)
+        </div>
+      </div>
+
+      <div class="callout warn">
+        <div class="callout-icon">⚠️</div>
+        <div class="callout-body">
+          <strong>브라우저 캐시 삭제 시 데이터가 사라집니다.</strong><br>
+          학교 공용 컴퓨터에서 사용할 때는 매번 상담 후 JSON을 저장하고, 개인 USB나 클라우드에 보관하세요.
+        </div>
+      </div>
+    </div>
+
+    <!-- ⑪ FAQ -->
+    <div class="section section-anchor" id="faq">
+      <div class="section-badge" style="background:#f1f5f9;color:var(--navy)">❓ 자주 묻는 질문</div>
+      <h2 class="section-title">자주 묻는 질문</h2>
+
+      <div class="faq-item">
+        <div class="faq-q" onclick="toggleFaq(this)">
+          학생 정보가 외부로 나가지 않나요? <span class="arrow">▼</span>
+        </div>
+        <div class="faq-a">
+          이 플랫폼은 외부 서버가 없습니다. 모든 데이터는 지금 사용하는 컴퓨터의 브라우저에만 저장됩니다.
+          AI 프롬프트를 외부 AI(Claude, ChatGPT 등)에 보낼 때만 인터넷을 사용하며, 그 외에는 완전히 로컬에서 동작합니다.
+          단, AI에 붙여넣는 프롬프트에는 학생 정보가 포함될 수 있으므로 학교 개인정보 처리 방침을 확인하세요.
+        </div>
+      </div>
+
+      <div class="faq-item">
+        <div class="faq-q" onclick="toggleFaq(this)">
+          인터넷이 없는 환경에서도 쓸 수 있나요? <span class="arrow">▼</span>
+        </div>
+        <div class="faq-a">
+          대부분의 기능은 인터넷 없이 작동합니다.
+          단, 화면 폰트(Pretendard)와 STEP 3의 차트(Chart.js), PDF 기능(PDF.js)은 인터넷 연결이 필요합니다.
+          완전 오프라인 환경에서는 기본 폰트로 표시되고 차트 기능이 제한될 수 있습니다.
+        </div>
+      </div>
+
+      <div class="faq-item">
+        <div class="faq-q" onclick="toggleFaq(this)">
+          학생이 여러 명인데 데이터가 섞이지 않나요? <span class="arrow">▼</span>
+        </div>
+        <div class="faq-a">
+          v4부터 학생별 독립 저장 구조가 적용됩니다. 학생을 전환해도 각자의 데이터가 분리되어 저장됩니다.
+          다만 상담 후에는 '현재 학생 저장'으로 JSON 백업을 해두는 것을 강력 권장합니다.
+        </div>
+      </div>
+
+      <div class="faq-item">
+        <div class="faq-q" onclick="toggleFaq(this)">
+          AI 없이도 사용할 수 있나요? <span class="arrow">▼</span>
+        </div>
+        <div class="faq-a">
+          네. STEP 1~2는 AI 없이 완전히 사용할 수 있습니다.
+          STEP 3(로드맵)도 학생부 분류와 교과교사 협조 시트는 AI 없이 됩니다.
+          AI가 필요한 부분은 '프롬프트 생성' 이후 단계뿐입니다.
+        </div>
+      </div>
+
+      <div class="faq-item">
+        <div class="faq-q" onclick="toggleFaq(this)">
+          어떤 브라우저를 써야 하나요? <span class="arrow">▼</span>
+        </div>
+        <div class="faq-a">
+          크롬(Chrome)을 가장 추천합니다. 엣지(Edge), 파이어폭스(Firefox)도 잘 작동합니다.
+          인터넷 익스플로러(IE)는 지원하지 않습니다.
+        </div>
+      </div>
+
+      <div class="faq-item">
+        <div class="faq-q" onclick="toggleFaq(this)">
+          v3에서 저장한 파일을 v5에서 쓸 수 있나요? <span class="arrow">▼</span>
+        </div>
+        <div class="faq-a">
+          네. '학생 불러오기'로 v3 JSON 파일을 열면 자동으로 v5 구조로 변환됩니다. 기존 데이터가 그대로 살아납니다.
+        </div>
+      </div>
+
+      <div class="faq-item">
+        <div class="faq-q" onclick="toggleFaq(this)">
+          협조 시트를 교과 선생님께 어떻게 전달하나요? <span class="arrow">▼</span>
+        </div>
+        <div class="faq-a">
+          세 가지 방법이 있습니다.<br>
+          ① '텍스트 복사' → 카카오톡·이메일에 붙여넣기<br>
+          ② 'HTML 저장' → 파일을 열어 인쇄<br>
+          ③ 교과 선생님의 컴퓨터에서 직접 열기<br>
+          가장 간단한 방법은 텍스트 복사 후 메신저로 전송입니다.
+        </div>
+      </div>
+    </div>
+
+    <!-- ⑫ 활용 팁 -->
+    <div class="section section-anchor" id="tips">
+      <div class="section-badge" style="background:var(--teal2);color:var(--teal3)">✨ 팁</div>
+      <h2 class="section-title">더 잘 활용하는 방법</h2>
+
+      <div class="card-grid">
+        <div class="card">
+          <div class="card-icon">📁</div>
+          <div class="card-title">폴더 관리</div>
+          <div class="card-desc">학년도별 폴더(예: 2025_3학년)를 만들고 플랫폼 파일과 JSON 백업을 함께 보관하세요.</div>
+        </div>
+        <div class="card">
+          <div class="card-icon">🔗</div>
+          <div class="card-title">즐겨찾기 등록</div>
+          <div class="card-desc">index.html을 크롬 즐겨찾기에 등록하면 다음 번에 폴더를 찾지 않아도 됩니다.</div>
+        </div>
+        <div class="card">
+          <div class="card-icon">🖨️</div>
+          <div class="card-title">인쇄 활용</div>
+          <div class="card-desc">협조 시트 HTML을 열고 Ctrl+P로 인쇄하면 교과 선생님께 종이로 전달할 수 있습니다.</div>
+        </div>
+        <div class="card">
+          <div class="card-icon">📋</div>
+          <div class="card-title">학생 복제</div>
+          <div class="card-desc">비슷한 진로를 가진 학생이 여럿이면 카드의 📋 버튼으로 복제 후 이름만 바꿔서 씁니다.</div>
+        </div>
+        <div class="card">
+          <div class="card-icon">💬</div>
+          <div class="card-title">AI 활용 팁</div>
+          <div class="card-desc">프롬프트 응답이 이상하면 "JSON 형식으로만 다시 답하세요"라고 추가 입력하세요.</div>
+        </div>
+        <div class="card">
+          <div class="card-icon">🎯</div>
+          <div class="card-title">세특 직결 전략</div>
+          <div class="card-desc">STEP 2의 '학생부 기록 근거' 칸이 실제 세특에 반영됩니다. 관찰 가능한 행동으로 구체적으로 씁니다.</div>
+        </div>
+      </div>
+
+      <a href="index.html" class="btn-start" style="margin-top:24px">
+        🚀 플랫폼 시작하기
+      </a>
+    </div>
+
+    <!-- 푸터 -->
+    <div class="guide-footer">
+      진로탐구 성장 플랫폼 v6 · 사용 가이드<br>
+      <span style="font-size:11px;opacity:.4;letter-spacing:1px">gyu</span>
+    </div>
+
+  </main>
+</div>
+
+<script>
+/* 규 · guide.js */
+function scrollTo(id) {
+  const el = document.getElementById(id);
+  if (el) el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  // 사이드바 활성
+  document.querySelectorAll('.sidebar-item').forEach(function(item) {
+    item.classList.remove('active');
+    if (item.getAttribute('onclick') && item.getAttribute('onclick').includes("'" + id + "'")) {
+      item.classList.add('active');
+    }
+  });
+}
+
+function toggleFaq(el) {
+  const item = el.closest('.faq-item');
+  const isOpen = item.classList.contains('open');
+  document.querySelectorAll('.faq-item.open').forEach(function(i) { i.classList.remove('open'); });
+  if (!isOpen) item.classList.add('open');
+}
+
+// 스크롤 연동으로 사이드바 자동 활성
+const sectionIds = ['intro','quickstart','overview','hub','step1','step2','step3','teacher-solo','with-student','data','faq','tips'];
+const sidebarMap = {};
+sectionIds.forEach(function(id) {
+  document.querySelectorAll('.sidebar-item').forEach(function(item) {
+    if (item.getAttribute('onclick') && item.getAttribute('onclick').includes("'" + id + "'")) {
+      sidebarMap[id] = item;
+    }
+  });
+});
+
+window.addEventListener('scroll', function() {
+  let current = sectionIds[0];
+  sectionIds.forEach(function(id) {
+    const el = document.getElementById(id);
+    if (el && el.getBoundingClientRect().top < 80) current = id;
+  });
+  Object.entries(sidebarMap).forEach(function([id, item]) {
+    item.classList.toggle('active', id === current);
+  });
+}, { passive: true });
+</script>
+</body>
+</html>
