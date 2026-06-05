@@ -1,12 +1,12 @@
 <!DOCTYPE html>
 <html lang="ko">
-<!-- 규 · gyu-platform-v5 -->
+<!-- 규 · gyu-platform-v8 -->
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="author" content="gyu">
-<meta name="version" content="gyu-v5">
-<title>진로탐구 성장 플랫폼 v6</title>
+<meta name="version" content="gyu-v8">
+<title>진로탐구 성장 플랫폼 v8</title>
 <link href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css" rel="stylesheet">
 <link rel="stylesheet" href="assets/common.css">
 <style>
@@ -97,16 +97,6 @@ input,select,textarea{font-family:inherit}
 .no-student-msg{background:var(--orangeL);border:1px solid #fed7aa;border-radius:var(--r);padding:12px 16px;font-size:13px;color:#92400e;margin-top:8px}
 
 /* ── STEP 카드 ── */
-.step-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}
-.step-card{background:var(--card);border:1.5px solid var(--line);border-radius:var(--r);padding:15px;cursor:pointer;transition:all .18s}
-.step-card:hover{transform:translateY(-2px);box-shadow:var(--shadow2);border-color:var(--teal)}
-.step-nbadge{display:inline-block;font-size:10px;font-weight:800;padding:2px 9px;border-radius:99px;margin-bottom:7px}
-.step-card.s1 .step-nbadge{background:#dbeafe;color:#1d4ed8}
-.step-card.s2 .step-nbadge{background:#f3e8ff;color:#6d28d9}
-.step-card.s3 .step-nbadge{background:var(--teal2);color:var(--teal3)}
-.step-title{font-size:13px;font-weight:800;color:var(--navy);line-height:1.4;margin-bottom:4px}
-.step-desc{font-size:11px;color:var(--muted);line-height:1.6;margin-bottom:7px}
-.step-st{font-size:11px;font-weight:700}
 
 /* ── 협조시트 ── */
 .collab-card{background:var(--card);border:1.5px solid var(--line);border-radius:var(--r);padding:18px;box-shadow:var(--shadow);margin-top:22px}
@@ -122,12 +112,6 @@ input,select,textarea{font-family:inherit}
 .util-btn.danger:hover{border-color:var(--red);background:var(--redL);color:var(--red)}
 
 /* ── 저장 체계 안내 ── */
-.save-guide{background:var(--blueL,#eff6ff);border:1px solid #bfdbfe;border-radius:var(--r);padding:15px 18px;margin-top:22px}
-.save-guide-title{font-size:13px;font-weight:800;color:#1d4ed8;margin-bottom:8px}
-.save-guide table{width:100%;border-collapse:collapse;font-size:12px}
-.save-guide th{background:#dbeafe;padding:7px 10px;text-align:left;font-weight:700;color:#1e40af}
-.save-guide td{padding:7px 10px;border-bottom:1px solid #dbeafe;color:var(--text)}
-.save-guide tr:last-child td{border:none}
 
 /* ── 공통 버튼 ── */
 .cp-btn{border:none;border-radius:9px;padding:8px 16px;font-size:13px;font-weight:700;cursor:pointer;transition:all .15s}
@@ -148,11 +132,6 @@ input,select,textarea{font-family:inherit}
 .modal-actions{display:flex;gap:8px;justify-content:flex-end;margin-top:18px}
 
 /* ── 가이드 박스 ── */
-.guide-box{background:var(--card);border:1.5px solid var(--line);border-radius:var(--r);padding:16px 18px;box-shadow:var(--shadow);margin-top:22px}
-.guide-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:9px;margin-top:10px}
-.g-item{background:var(--bg);border-radius:9px;padding:11px}
-.g-item-label{font-size:11px;font-weight:700;margin-bottom:5px}
-.g-item-text{font-size:12px;color:var(--muted);line-height:1.7}
 
 /* ── 토스트 ── */
 .cp-toast{position:fixed;bottom:24px;left:50%;transform:translateX(-50%) translateY(16px);background:var(--navy);color:#fff;font-size:13px;font-weight:600;padding:9px 20px;border-radius:99px;z-index:9999;opacity:0;pointer-events:none;transition:all .3s;white-space:nowrap}
@@ -161,9 +140,28 @@ input,select,textarea{font-family:inherit}
 .footer{text-align:center;font-size:12px;color:var(--muted);padding:28px 0;opacity:.55}
 .blueL{--blueL:#eff6ff}
 
+
+/* ── 최근 작업 카드 ── */
+.recent-card{background:linear-gradient(135deg,#fff9ec,#fffde7);border:1.5px solid #fcd34d;border-radius:var(--r);padding:16px 20px;margin-top:16px;display:flex;align-items:center;justify-content:space-between;gap:12px;box-shadow:var(--shadow)}
+.recent-left{min-width:0}
+.recent-tag{font-size:10px;font-weight:800;color:#92400e;letter-spacing:.5px;margin-bottom:5px}
+.recent-name{font-size:15px;font-weight:800;color:var(--navy);margin-bottom:3px;display:flex;align-items:center;gap:8px}
+.recent-detail{font-size:12px;color:var(--muted);line-height:1.6}
+.btn-continue{flex-shrink:0;background:var(--navy);color:#fff;border:none;border-radius:10px;padding:10px 18px;font-size:13px;font-weight:700;cursor:pointer;white-space:nowrap;transition:background .15s}
+.btn-continue:hover{background:var(--navy2)}
+/* ── 예시 박스 ── */
+.example-box{background:var(--card);border:1.5px solid var(--line);border-radius:var(--r);padding:14px 16px;margin-top:12px;box-shadow:var(--shadow);grid-column:1/-1}
+.example-tag{font-size:10px;font-weight:800;color:var(--muted);letter-spacing:.5px;margin-bottom:10px}
+.example-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.example-item{background:var(--bg);border-radius:8px;padding:10px 12px}
+.example-label{font-size:10px;font-weight:700;color:var(--teal3);margin-bottom:4px}
+.example-text{font-size:12px;color:var(--text);line-height:1.65}
+@media(max-width:600px){.recent-card{flex-direction:column;align-items:flex-start}.btn-continue{width:100%}.example-grid{grid-template-columns:1fr}.quick-two-col{grid-template-columns:1fr !important}}
+
 input[type=file]{display:none}
 @media(max-width:600px){
   .entry-grid,.step-grid,.guide-grid{grid-template-columns:1fr}
+  .quick-two-col{grid-template-columns:1fr !important}
   .hero{padding:28px 18px}
   .hero h1{font-size:22px}
 }
@@ -174,10 +172,11 @@ input[type=file]{display:none}
 <!-- 히어로 -->
 <header class="hero">
   <div class="hero-inner">
-    <div class="hero-badge">진로탐구 성장 플랫폼 v6</div>
+    <div class="hero-badge">진로탐구 성장 플랫폼 v8</div>
     <h1 id="platform-title">진로탐구 <em>성장</em> 플랫폼</h1>
-    <p class="hero-sub">질문에서 학생부 성장까지 — 3단계 자기주도 탐구 여정</p>
+    <p class="hero-sub">관심 학과로 탐구 주제를 만들고, 학생부 성장 계획까지 설계합니다</p>
     <a href="guide.html" class="hero-guide-link">📖 처음이세요? 사용 가이드 →</a>
+    <p style="font-size:11px;color:rgba(255,255,255,.5);margin-top:8px">처음 사용해도 3분이면 시작할 수 있습니다</p>
   </div>
 </header>
 
@@ -188,6 +187,61 @@ input[type=file]{display:none}
     <span id="storage-warn-icon">⚠️</span>
     <span id="storage-warn-msg"></span>
     <button class="cp-btn outline" style="margin-left:auto;padding:4px 12px;font-size:12px" onclick="exportAll()">전체 백업</button>
+  </div>
+
+
+  <!-- ══ 2분 시작 가이드 + 결과물 미리보기 ══ -->
+  <div class="quick-two-col" style="display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:20px">
+
+    <!-- 2분 가이드 -->
+    <div style="background:var(--card);border:1.5px solid var(--line);border-radius:var(--r);padding:18px 20px;box-shadow:var(--shadow)">
+      <div style="font-size:12px;font-weight:800;color:var(--teal3);letter-spacing:.5px;margin-bottom:10px">⚡ 처음이라면 이렇게 시작하세요</div>
+      <div style="font-size:13px;color:var(--navy);font-weight:700;margin-bottom:6px">👩‍🎓 학생</div>
+      <div style="font-size:12px;color:var(--muted);line-height:1.8;margin-bottom:10px">
+        관심 학과 선택 → 질문 3개 작성 → 탐구 설계 저장
+      </div>
+      <div style="font-size:13px;color:var(--navy);font-weight:700;margin-bottom:6px">👩‍🏫 교사</div>
+      <div style="font-size:12px;color:var(--muted);line-height:1.8">
+        학생 추가 → 학생부 입력 → 성장 로드맵 생성
+      </div>
+    </div>
+
+    <!-- 결과물 미리보기 -->
+    <div style="background:linear-gradient(135deg,var(--teal2),#f0fdf4);border:1.5px solid #99f6e4;border-radius:var(--r);padding:18px 20px;box-shadow:var(--shadow)">
+      <div style="font-size:12px;font-weight:800;color:var(--teal3);letter-spacing:.5px;margin-bottom:10px">🎁 완성 후 받을 수 있는 자료</div>
+      <ul style="list-style:none;display:flex;flex-direction:column;gap:5px">
+        <li style="font-size:12px;color:var(--text);display:flex;align-items:center;gap:7px"><span style="color:var(--teal);font-size:10px">✦</span> 나만의 탐구 주제와 질문</li>
+        <li style="font-size:12px;color:var(--text);display:flex;align-items:center;gap:7px"><span style="color:var(--teal);font-size:10px">✦</span> 탐구 설계 기록</li>
+        <li style="font-size:12px;color:var(--text);display:flex;align-items:center;gap:7px"><span style="color:var(--teal);font-size:10px">✦</span> 학생부 성장 로드맵</li>
+        <li style="font-size:12px;color:var(--text);display:flex;align-items:center;gap:7px"><span style="color:var(--teal);font-size:10px">✦</span> 교과교사 협조 시트</li>
+        <li style="font-size:12px;color:var(--text);display:flex;align-items:center;gap:7px"><span style="color:var(--teal);font-size:10px">✦</span> 세특 방향 · 면접 예상 질문</li>
+      </ul>
+    </div>
+    <!-- 결과물 예시 미리보기 -->
+    <div class="example-box">
+      <div class="example-tag">✦ 결과물 예시 (실제 출력 형태)</div>
+      <div class="example-grid">
+        <div class="example-item">
+          <div class="example-label">탐구 질문 예시</div>
+          <div class="example-text">"AI 반도체 산업의 성장은 지역 경제 격차를 심화시킬까?"</div>
+        </div>
+        <div class="example-item">
+          <div class="example-label">세특 방향 예시</div>
+          <div class="example-text">기술 산업의 성장을 경제 구조와 지역 불균형 관점에서 해석하려는 비판적 사고 태도가 드러남</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+  <!-- ══ 최근 작업 이어하기 (학생 있을 때만 표시) ══ -->
+  <div class="recent-card" id="recent-card" style="display:none">
+    <div class="recent-left">
+      <div class="recent-tag">⏱ 최근 작업</div>
+      <div class="recent-name" id="recent-name">—</div>
+      <div class="recent-detail" id="recent-detail">—</div>
+    </div>
+    <button class="btn-continue" onclick="continueRecent()">이어서 하기 →</button>
   </div>
 
   <!-- ══ 학생 관리 ══ -->
@@ -214,8 +268,8 @@ input[type=file]{display:none}
         <div class="onboard-box">
           <strong>⚡ 처음이세요?</strong><br>
           1. <strong>새 학생 추가</strong> 클릭 → 이름만 입력해도 됩니다<br>
-          2. <strong>교사 진단 시작</strong>으로 바로 시작<br>
-          3. 상담 후 <strong>현재 학생 저장</strong>으로 백업
+          2. <strong>교사용 성장 진단하기</strong>로 바로 시작<br>
+          3. 상담 후 <strong>현재 작업 저장하기</strong>로 백업
         </div>
         <a href="guide.html" class="onboard-guide-btn">📖 상세 가이드 보기</a>
       </div>
@@ -224,56 +278,39 @@ input[type=file]{display:none}
 
   <!-- ══ 탐구 시작 ══ -->
   <div style="margin-top:22px">
-    <div class="section-label">탐구 시작</div>
+    <div style="font-size:14px;font-weight:800;color:var(--navy);margin-bottom:10px">무엇을 하시겠습니까?</div>
     <div id="no-student-msg" class="no-student-msg" style="display:none">
       먼저 학생을 선택하거나 새 학생을 추가해 주세요.
     </div>
     <div class="entry-grid">
       <button class="entry-btn student" onclick="startAsStudent()">
         <div class="entry-icon">🎓</div>
-        <div class="entry-name">학생 탐구 시작</div>
-        <div class="entry-desc">키워드 선택 → 탐구 설계 → 학생부 로드맵<br>처음부터 순서대로 진행합니다</div>
-        <div class="entry-arrow">STEP 1 키워드 생성기로 →</div>
+        <div class="entry-name">학생 탐구 시작하기</div>
+        <div class="entry-desc">
+          관심 학과를 고르고, 나만의 탐구 질문을 만들어 봅니다<br>
+          <span style="opacity:.8;font-size:11px">처음 사용해도 순서대로 따라가면 됩니다 · 질문 3개부터</span>
+        </div>
+        <div class="entry-arrow">관심 학과 선택부터 →</div>
       </button>
       <button class="entry-btn teacher" onclick="startAsTeacher()">
         <div class="entry-icon">📋</div>
-        <div class="entry-name">교사 진단 시작</div>
-        <div class="entry-desc">학생부 입력 → GAP 분석 → 세특 전략<br>STEP 3 성장 로드맵으로 바로 이동합니다</div>
-        <div class="entry-arrow">STEP 3 성장 로드맵으로 →</div>
+        <div class="entry-name">교사용 성장 진단하기</div>
+        <div class="entry-desc">
+          학생부 기록을 바탕으로 세특 방향과 성장 로드맵을 설계합니다<br>
+          <span style="opacity:.8;font-size:11px">학생부 PDF·텍스트 붙여넣기 → 협조시트·면접 질문 완성</span>
+        </div>
+        <div class="entry-arrow">학생부 성장 로드맵으로 →</div>
       </button>
     </div>
   </div>
 
-  <!-- ══ 단계별 이동 ══ -->
-  <div style="margin-top:22px">
-    <div class="section-label">단계별 직접 이동</div>
-    <div class="step-grid">
-      <div class="step-card s1" onclick="goStep('keyword.html')">
-        <div class="step-nbadge">STEP 1</div>
-        <div class="step-title">학과별 핵심키워드<br>탐구 질문 생성기</div>
-        <div class="step-desc">7계열 198개 학과 키워드 → 나만의 질문 3개</div>
-        <div class="step-st" id="status-kw">⬜ 미시작</div>
-      </div>
-      <div class="step-card s2" onclick="goStep('inquiry.html')">
-        <div class="step-nbadge">STEP 2</div>
-        <div class="step-title">나만의 탐구 설계<br>기록하기</div>
-        <div class="step-desc">탐구 동기·방법·산출물·성찰 구조화</div>
-        <div class="step-st" id="status-inq">⬜ 미시작</div>
-      </div>
-      <div class="step-card s3" onclick="goStep('roadmap.html')">
-        <div class="step-nbadge">STEP 3</div>
-        <div class="step-title">학생부 성장<br>로드맵</div>
-        <div class="step-desc">학생부 GAP 분석 + AI 프롬프트 + 협조시트</div>
-        <div class="step-st" id="status-rm">→ 이동</div>
-      </div>
-    </div>
-  </div>
+  <!-- 단계별 직접 이동 섹션 제거 — 진입 버튼으로 통합 -->
 
   <!-- ══ 협조시트 (데이터 있을 때만) ══ -->
   <div class="collab-card" id="collab-card" style="display:none">
     <div class="collab-title">
       🧾 교과교사 협조 시트 (자동 생성)
-      <span style="font-size:11px;background:#dbeafe;color:#1d4ed8;padding:2px 8px;border-radius:99px;font-weight:700">교과별 맞춤 v5</span>
+      <span style="font-size:11px;background:#dbeafe;color:#1d4ed8;padding:2px 8px;border-radius:99px;font-weight:700">교과별 맞춤</span>
     </div>
     <div class="collab-desc">탐구 설계 데이터 + 관련 교과 기반으로 교과별 관찰 포인트가 자동 생성됩니다.</div>
     <textarea id="collab-preview" readonly></textarea>
@@ -287,52 +324,35 @@ input[type=file]{display:none}
 
   <!-- ══ 데이터 관리 ══ -->
   <div style="margin-top:22px">
-    <div class="section-label">데이터 관리</div>
+    <div class="section-label">저장 · 불러오기</div>
     <div class="util-row">
-      <button class="util-btn" onclick="exportCurrentStudent()">💾 현재 학생 저장</button>
-      <button class="util-btn" onclick="exportAll()">📦 전체 내보내기</button>
-      <button class="util-btn" onclick="document.getElementById('file-import-student').click()">📂 학생 불러오기</button>
+      <button class="util-btn" onclick="exportCurrentStudent()" title="현재 선택된 학생 데이터를 파일로 저장합니다">
+        💾 현재 작업 저장하기
+      </button>
+      <button class="util-btn" onclick="document.getElementById('file-import-student').click()" title="저장했던 파일을 불러옵니다">
+        📂 저장한 작업 불러오기
+      </button>
+      <button class="util-btn" onclick="exportAll()" title="모든 학생 데이터를 한 번에 백업합니다">
+        📦 전체 백업하기
+      </button>
       <button class="util-btn" onclick="refreshPanel()">🔄 새로고침</button>
-      <button class="util-btn danger" onclick="confirmClearAll()">🗑️ 전체 초기화</button>
+    </div>
+    <div style="margin-top:8px">
+      <button class="util-btn danger" onclick="confirmClearAll()" style="font-size:12px;padding:6px 12px;opacity:.7">
+        🗑️ 전체 초기화 (모든 데이터 삭제)
+      </button>
+    </div>
+    <div style="margin-top:6px;font-size:11px;color:var(--muted)">
+      💡 저장된 파일은 컴퓨터 <strong>다운로드 폴더</strong>에 생성됩니다
     </div>
   </div>
 
-  <!-- ══ 저장 체계 안내 ══ -->
-  <div class="save-guide">
-    <div class="save-guide-title">💡 저장 체계 안내 — 어떤 저장 버튼을 써야 하나요?</div>
-    <table>
-      <thead><tr><th>상황</th><th>사용할 버튼</th><th>위치</th></tr></thead>
-      <tbody>
-        <tr><td>상담 끝난 직후 (가장 중요)</td><td><strong>현재 학생 저장</strong></td><td>이 화면 · 데이터 관리</td></tr>
-        <tr><td>다른 컴퓨터에서 이어 작업</td><td>저장한 JSON → USB → <strong>학생 불러오기</strong></td><td>이 화면 · 데이터 관리</td></tr>
-        <tr><td>학년도 말 전체 보관</td><td><strong>전체 내보내기</strong></td><td>이 화면 · 데이터 관리</td></tr>
-        <tr><td>STEP 2(탐구설계) 내부 저장 버튼</td><td>탐구 설계 <strong>단독</strong> 저장 (플랫폼 공유 안 됨)</td><td>inquiry.html 화면</td></tr>
-        <tr><td>v3/v4 파일 복원</td><td><strong>학생 불러오기</strong> (자동 변환)</td><td>이 화면 · 데이터 관리</td></tr>
-      </tbody>
-    </table>
-  </div>
 
-  <!-- ══ 사용 안내 ══ -->
-  <div class="guide-box">
-    <div style="font-size:13px;font-weight:800;color:var(--navy);display:flex;align-items:center;gap:6px">💡 사용 방법</div>
-    <div class="guide-grid">
-      <div class="g-item">
-        <div class="g-item-label" style="color:#1d4ed8">① 학생</div>
-        <div class="g-item-text">학생 추가 → <strong>학생 탐구 시작</strong> → STEP 1~3 순서대로</div>
-      </div>
-      <div class="g-item">
-        <div class="g-item-label" style="color:#6d28d9">② 교사</div>
-        <div class="g-item-text">학생 선택 → <strong>교사 진단 시작</strong> → AI 프롬프트 활용</div>
-      </div>
-      <div class="g-item">
-        <div class="g-item-label" style="color:var(--teal3)">③ 보관</div>
-        <div class="g-item-text">상담 후 <strong>JSON 저장</strong> → 다음엔 <strong>학생 불러오기</strong></div>
-      </div>
-    </div>
-  </div>
+
+
 
   <div class="footer">
-    진로탐구 성장 플랫폼 v6<br>
+    진로탐구 성장 플랫폼 v8<br>
     <span>공유 기능 없음 · 외부 API 미사용 · 로컬 저장 전용</span><br>
     <span style="font-size:11px;opacity:.35;letter-spacing:2px;margin-top:4px;display:inline-block">gyu</span>
   </div>
@@ -384,6 +404,67 @@ input[type=file]{display:none}
 <script src="shared.js"></script>
 <script src="export-import.js"></script>
 <script>
+
+/* 규 · v8: 최근 작업 이어하기 */
+function _formatAgo(iso) {
+  if (!iso) return '';
+  try {
+    var d = new Date(iso);
+    var now = new Date();
+    var diff = Math.floor((now - d) / 60000); // 분
+    if (diff < 1)   return '방금 전';
+    if (diff < 60)  return diff + '분 전';
+    var h = Math.floor(diff / 60);
+    if (h < 24)     return h + '시간 전';
+    var days = Math.floor(h / 24);
+    if (days === 1) return '어제';
+    if (days < 7)   return days + '일 전';
+    return d.toLocaleDateString('ko-KR', {month:'short',day:'numeric'});
+  } catch(e) { return ''; }
+}
+
+function renderRecentCard() {
+  var card  = document.getElementById('recent-card');
+  var nameEl  = document.getElementById('recent-name');
+  var detailEl = document.getElementById('recent-detail');
+  if (!card || typeof CareerPlatform === 'undefined') return;
+
+  var list = CareerPlatform.getStudentList();
+  if (!list || !list.length) { card.style.display = 'none'; return; }
+
+  // 가장 최근 수정된 학생
+  list.sort(function(a, b) { return (b.updatedAt || '') > (a.updatedAt || '') ? 1 : -1; });
+  var st = list[0];
+  if (!st) { card.style.display = 'none'; return; }
+
+  var parts = [];
+  if (st.grade)          parts.push(st.grade + '학년');
+  if (st.className)      parts.push(st.className + '반');
+  if (st.careerInterest) parts.push(st.careerInterest);
+
+  nameEl.textContent  = st.name || '(이름 없음)';  /* textContent는 자동 escape */
+  var detail = '';
+  if (st.inquiryTitle)   detail = '🔬 ' + st.inquiryTitle;
+  else if (st.department) detail = '🏛 ' + st.department;
+  else if (parts.length)  detail = parts.join(' · ');
+  var ago = _formatAgo(st.updatedAt);
+  detailEl.innerHTML  = _e(detail) + (ago ? ' <span style="color:var(--muted);margin-left:6px">· ' + ago + '</span>' : '');
+
+  card.style.display = 'flex';
+  card._studentId = st.id;
+}
+
+function continueRecent() {
+  var card = document.getElementById('recent-card');
+  if (!card || !card._studentId) return;
+  CareerPlatform.setCurrentStudent(card._studentId);
+  // 탐구 설계가 있으면 STEP3, 키워드만 있으면 STEP2, 아무것도 없으면 STEP1
+  var st = CareerPlatform.getStudentList().find(function(s){ return s.id === card._studentId; });
+  if (st && st.inquiryTitle)  { location.href = 'roadmap.html'; }
+  else if (st && st.department) { location.href = 'inquiry.html'; }
+  else                          { location.href = 'keyword.html'; }
+}
+
 /* 규 · index.js (v5) — bindImportHandler는 export-import.js에서만 정의 */
 
 /* ── escape 단축어 ── */
@@ -403,6 +484,7 @@ document.addEventListener('DOMContentLoaded', function() {
   }
 
   renderStudentList();
+  renderRecentCard();
   checkStorageUsage();
 
   // export-import.js에서 canonical 정의한 핸들러 사용 (중복 제거)

@@ -1,6 +1,6 @@
 /**
  * roadmap-bridge.js — 진로탐구 성장 플랫폼 v6
- * 규 · gyu-platform-v6
+ * 규 · gyu-platform-v8
  *
  * roadmap.html 플랫폼 연동 함수 모음
  * v6에서 문서화 목적으로 분리 (참조 파일)

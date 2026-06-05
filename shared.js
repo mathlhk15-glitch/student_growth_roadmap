@@ -6,7 +6,7 @@
  *  v1.x (v3)  단일 학생 구조
  *  v2.0 (v4)  다중 학생 구조 (단일 localStorage 키)
  *  v2.1 (v5)
- *  v2.2 (v6)  CSV 따옴표 파서 / inquiry·roadmap innerHTML escape 완성  학생별 분리 키 · XSS 차단 · userMode 구조 정리
+ *  v2.2 (v7)  CSV 따옴표 파서 / inquiry·roadmap innerHTML escape 완성  학생별 분리 키 · XSS 차단 · userMode 구조 정리
  *             aiResultRaw 용량 제한 · 교과별 협조시트 분기
  *             저장 실패 감지 · 마이그레이션 v3→v4→v5
  */
@@ -22,6 +22,8 @@
    *  careerPlatform_v5_student_{id}
    *    → StudentRecord
    * ───────────────────────────────────── */
+  /* ※ localStorage 키는 v5 이름 그대로 유지 — 기존 사용자 데이터 호환 보장
+     키 이름 변경 시 모든 사용자의 저장 데이터가 초기화되므로 변경 금지 */
   const KEY_META    = 'careerPlatform_v5_meta';
   const KEY_PREFIX  = 'careerPlatform_v5_student_';
   // 마이그레이션 소스 키
@@ -71,7 +73,7 @@
 
   function makeDefaultMeta() {
     return {
-      version: '2.2.0',
+      version: '2.4.1',
       currentStudentId: null,
       studentIds: [],
       userMode: 'teacher',   // 'teacher' | 'student'  ← store 레벨 (v5 수정)

@@ -1,6 +1,6 @@
 /**
  * export-import.js — 진로탐구 성장 플랫폼 v5
- * 규 · gyu-platform-v6
+ * 규 · gyu-platform-v8
  *
  * JSON/CSV 가져오기·내보내기 헬퍼 (canonical 정의)
  * index.html 안에 동일 함수를 정의하지 않도록 한다. (v5 중복 제거)
